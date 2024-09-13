@@ -1,0 +1,73 @@
+METHOD CreateForm( lCreate ) CLASS TFrmProduto
+
+   IF lCreate
+      ::SetBounds( 664, 307, 448, 157 )
+      ::SetClientSize( 432, 118 )
+      ::cText := "Novo produto"
+      ::oFont := TFont():Create( "MS Sans Serif", 8, 0, 400 )
+      ::lParentIcon := .F.
+      ::oIcon := "loja"
+      ::lMinimizeBox := .F.
+      ::lMaximizeBox := .F.
+      ::OnKeyDown := "FormKeyDown"
+      ::OnInitialize := "FormInitialize"
+      ::Create()
+   ENDIF
+   ::Super:CreateForm( .F. )
+
+   WITH OBJECT ::oLabelId := TLabel():New( Self )
+      :SetBounds( 16, 16, 42, 20 )
+      :cText := "Código:"
+      :nVAlignment := vaCENTER
+      :lAutoSize := .F.
+      :Create()
+   END
+
+   WITH OBJECT ::oEditId := TEdit():New( Self )
+      :SetBounds( 60, 16, 74, 20 )
+      :lEnabled := .F.
+      :Value := ""
+      :nAlignment := taRIGHT
+      :Create()
+   END
+
+   WITH OBJECT ::oLabelNome := TLabel():New( Self )
+      :SetBounds( 148, 16, 32, 20 )
+      :cText := "Nome:"
+      :nVAlignment := vaCENTER
+      :lAutoSize := .F.
+      :Create()
+   END
+
+   WITH OBJECT ::oEditNome := TEdit():New( Self )
+      :SetBounds( 180, 16, 238, 20 )
+      :Value := ""
+      :Create()
+   END
+
+   WITH OBJECT ::oLabelEstoque := TLabel():New( Self )
+      :SetBounds( 16, 44, 43, 20 )
+      :cText := "Estoque:"
+      :nVAlignment := vaCENTER
+      :lAutoSize := .F.
+      :Create()
+   END
+
+   WITH OBJECT ::oEditEstoque := TMaskEdit():New( Self )
+      :SetBounds( 60, 44, 86, 20 )
+      :nAlignment := taRIGHT
+      :nMaxLength := 11
+      :cPicture := "@E 999,999.999"
+      :Value := 0
+      :Create()
+   END
+
+   WITH OBJECT ::oBtnConfirmar := TBtnBmp():New( Self )
+      :SetBounds( 328, 76, 90, 30 )
+      :cText := "Confirmar"
+      :oBitmaps := "confirmar"
+      :OnClick := "BtnConfirmarClick"
+      :Create()
+   END
+
+RETURN Self

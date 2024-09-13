@@ -67,6 +67,9 @@
       <File Filename="SuperLoja.prg"/>
       <File Filename="Imagens.rc"/>
       <File Filename="FrmPrincipal.prg"/>
+      <File Filename="FrmProduto.prg"/>
+      <File Filename="Funcoes_LOG.prg"/>
+      <File Filename="Funcoes_SQL.prg"/>
    </Files>
    <Libraries>
       <Library Filename="[xailer]xailer"/>
@@ -74,7 +77,7 @@
       <Library Filename="[xailer]samples"/>
       <Library Filename="[xailer]sqlite" Link="N"/>
       <Library Filename="[xailer]libmariadb" Link="N"/>
-      <Library Filename="[xailer]libmysql" Link="N"/>
+      <Library Filename="[xailer]libmysql"/>
       <Library Filename="[xailer]xailer.res"/>
       <Library Filename="[xailer]xailermsg.res"/>
       <Library Filename="[harbour]hbextern"/>
