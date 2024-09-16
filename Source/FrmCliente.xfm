@@ -1,0 +1,56 @@
+METHOD CreateForm( lCreate ) CLASS TFrmCliente
+
+   IF lCreate
+      ::SetBounds( 735, 390, 348, 160 )
+      ::SetClientSize( 332, 121 )
+      ::cText := "Novo cliente"
+      ::oFont := TFont():Create( "MS Sans Serif", 8, 0, 400 )
+      ::lParentIcon := .F.
+      ::oIcon := "loja"
+      ::lCentered := .T.
+      ::lMinimizeBox := .F.
+      ::lMaximizeBox := .F.
+      ::OnInitialize := "FormInitialize"
+      ::OnClose := "FormClose"
+      ::OnKeyDown := "FormKeyDown"
+      ::Create()
+   ENDIF
+   ::Super:CreateForm( .F. )
+
+   WITH OBJECT ::oLabelId := TLabel():New( Self )
+      :SetBounds( 12, 20, 37, 20 )
+      :cText := "Código:"
+      :nVAlignment := vaCENTER
+      :Create()
+   END
+
+   WITH OBJECT ::oEditId := TDBEdit():New( Self )
+      :SetBounds( 52, 20, 74, 20 )
+      :lEnabled := .F.
+      :nAlignment := taRIGHT
+      :oDataField := "id"
+      :Create()
+   END
+
+   WITH OBJECT ::oLabelNome := TLabel():New( Self )
+      :SetBounds( 20, 48, 32, 20 )
+      :cText := "Nome:"
+      :nVAlignment := vaCENTER
+      :Create()
+   END
+
+   WITH OBJECT ::oEditNome := TDBEdit():New( Self )
+      :SetBounds( 52, 48, 270, 20 )
+      :oDataField := "nome"
+      :Create()
+   END
+
+   WITH OBJECT ::oBtnConfirmar := TBtnBmp():New( Self )
+      :SetBounds( 232, 80, 90, 30 )
+      :cText := "Confirmar"
+      :oBitmaps := "confirmar"
+      :OnClick := "BtnConfirmarClick"
+      :Create()
+   END
+
+RETURN Self
