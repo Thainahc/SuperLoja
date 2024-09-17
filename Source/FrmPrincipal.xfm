@@ -1,8 +1,8 @@
 METHOD CreateForm( lCreate ) CLASS TFrmPrincipal
 
    IF lCreate
-      ::SetBounds( 495, 424, 888, 484 )
-      ::SetClientSize( 872, 445 )
+      ::SetBounds( 386, 213, 1413, 801 )
+      ::SetClientSize( 1397, 762 )
       ::cText := "Super Loja"
       ::oFont := TFont():Create( "MS Sans Serif", 8, 0, 400 )
       ::lParentIcon := .F.
@@ -63,7 +63,7 @@ METHOD CreateForm( lCreate ) CLASS TFrmPrincipal
    END
 
    WITH OBJECT ::oPages := TPages():New( Self )
-      :SetBounds( 0, 0, 872, 425 )
+      :SetBounds( 0, 0, 1397, 742 )
       :nAlign := alCLIENT
       :oBkgnd := "fundo"
       :nBkgndMode := blSTRETCHSMOOTH
@@ -87,7 +87,7 @@ METHOD CreateForm( lCreate ) CLASS TFrmPrincipal
    END
 
          WITH OBJECT ::oExplorerBarProdutos := TExplorerBar():New( ::oPageProdutos )
-            :SetBounds( 0, 0, 200, 425 )
+            :SetBounds( 0, 0, 200, 742 )
             :AddItem( "Opções" )
             :Create()
          END
@@ -124,7 +124,7 @@ METHOD CreateForm( lCreate ) CLASS TFrmPrincipal
             END
 
          WITH OBJECT ::oBrowseProdutos := TDBBrowse():New( ::oPageProdutos )
-            :SetBounds( 200, 0, 672, 425 )
+            :SetBounds( 200, 0, 1197, 742 )
             :nAlign := alCLIENT
             WITH OBJECT TDBBrwColumn():New( ::oBrowseProdutos )
                :cHeader := "Código"
@@ -163,7 +163,7 @@ METHOD CreateForm( lCreate ) CLASS TFrmPrincipal
          END
 
          WITH OBJECT ::oExplorerBarClientes := TExplorerBar():New( ::oPageClientes )
-            :SetBounds( 0, 0, 200, 425 )
+            :SetBounds( 0, 0, 200, 742 )
             :AddItem( "Opções" )
             :Create()
          END
@@ -200,7 +200,7 @@ METHOD CreateForm( lCreate ) CLASS TFrmPrincipal
             END
 
          WITH OBJECT ::oBrowseClientes := TDBBrowse():New( ::oPageClientes )
-            :SetBounds( 200, 0, 672, 425 )
+            :SetBounds( 200, 0, 1197, 742 )
             :nAlign := alCLIENT
             WITH OBJECT TDBBrwColumn():New( ::oBrowseClientes )
                :cHeader := "Código"
@@ -228,7 +228,7 @@ METHOD CreateForm( lCreate ) CLASS TFrmPrincipal
          END
 
          WITH OBJECT ::oExplorerBarPedidos := TExplorerBar():New( ::oPagePedidos )
-            :SetBounds( 0, 0, 200, 425 )
+            :SetBounds( 0, 0, 200, 742 )
             :AddItem( "Opções" )
             :Create()
          END
@@ -264,43 +264,71 @@ METHOD CreateForm( lCreate ) CLASS TFrmPrincipal
                :Create()
             END
 
-         WITH OBJECT ::oBrowsePedidos := TDBBrowse():New( ::oPagePedidos )
-            :SetBounds( 200, 0, 672, 425 )
-            :nAlign := alCLIENT
-            WITH OBJECT TDBBrwColumn():New( ::oBrowsePedidos )
-               :cHeader := "Número"
-               :nAlignment := taRIGHTHEADERCENTER
-               :nWidth := 71
-               :oDataField := "id"
-               :OnDrawCell := "BrowsePedidosDrawCell"
-               :Create()
-            END
-
-            WITH OBJECT TDBBrwColumn():New( ::oBrowsePedidos )
-               :cHeader := "Data"
-               :nAlignment := taCENTER
-               :nWidth := 101
-               :oDataField := "data"
-               :OnDrawCell := "BrowsePedidosDrawCell"
-               :Create()
-            END
-
-            WITH OBJECT TDBBrwColumn():New( ::oBrowsePedidos )
-               :cHeader := "Cliente"
-               :nAlignment := taLEFTHEADERCENTER
-               :nWidth := 471
-               :oDataField := "nome"
-               :OnDrawCell := "BrowsePedidosDrawCell"
-               :Create()
-            END
-
-            TBrwRecSel():Create( ::oBrowsePedidos )
-
-            :lAllowEdit := .F.
-            :oDataSet := ::oSQLQueryPedidos
-            :OnKeyDown := "BrowsePedidosKeyDown"
-            :OnDblClick := "BrowsePedidosDblClick"
+         WITH OBJECT ::oBevelRodapePedidos := TBevel():New( ::oPagePedidos )
+            :SetBounds( 200, 712, 1197, 30 )
+            :nAlign := alBOTTOM
+            :nBorderStyle := bvNONE
             :Create()
          END
+
+            WITH OBJECT ::oImageLegendaCancelado := TImage():New( ::oBevelRodapePedidos )
+               :SetBounds( 24, 4, 20, 20 )
+               :oPicture := "legenda_vermelho"
+               :Create()
+            END
+
+            WITH OBJECT ::oLabelLegendaCancelado := TLabel():New( ::oBevelRodapePedidos )
+               :SetBounds( 48, 4, 52, 20 )
+               :cText := "Cancelado"
+               :nVAlignment := vaCENTER
+               :lAutoSize := .F.
+               :Create()
+            END
+
+         WITH OBJECT ::oBevelBrowsePedidos := TBevel():New( ::oPagePedidos )
+            :SetBounds( 200, 0, 1197, 712 )
+            :nAlign := alCLIENT
+            :nBorderStyle := bvNONE
+            :Create()
+         END
+
+            WITH OBJECT ::oBrowsePedidos := TDBBrowse():New( ::oBevelBrowsePedidos )
+               :SetBounds( 0, 0, 1197, 712 )
+               :nAlign := alCLIENT
+               WITH OBJECT TDBBrwColumn():New( ::oBrowsePedidos )
+                  :cHeader := "Número"
+                  :nAlignment := taRIGHTHEADERCENTER
+                  :nWidth := 71
+                  :oDataField := "id"
+                  :OnDrawCell := "BrowsePedidosDrawCell"
+                  :Create()
+               END
+
+               WITH OBJECT TDBBrwColumn():New( ::oBrowsePedidos )
+                  :cHeader := "Data"
+                  :nAlignment := taCENTER
+                  :nWidth := 101
+                  :oDataField := "data"
+                  :OnDrawCell := "BrowsePedidosDrawCell"
+                  :Create()
+               END
+
+               WITH OBJECT TDBBrwColumn():New( ::oBrowsePedidos )
+                  :cHeader := "Cliente"
+                  :nAlignment := taLEFTHEADERCENTER
+                  :nWidth := 471
+                  :oDataField := "nome"
+                  :OnDrawCell := "BrowsePedidosDrawCell"
+                  :Create()
+               END
+
+               TBrwRecSel():Create( ::oBrowsePedidos )
+
+               :lAllowEdit := .F.
+               :oDataSet := ::oSQLQueryPedidos
+               :OnKeyDown := "BrowsePedidosKeyDown"
+               :OnDblClick := "BrowsePedidosDblClick"
+               :Create()
+            END
 
 RETURN Self

@@ -21,7 +21,11 @@ CLASS TFrmPrincipal FROM TForm
    COMPONENT oPagePedidos
    COMPONENT oExplorerBarPedidos
    COMPONENT oOptionListPedidos
+   COMPONENT oBevelBrowsePedidos
    COMPONENT oBrowsePedidos
+   COMPONENT oBevelRodapePedidos
+   COMPONENT oImageLegendaCancelado
+   COMPONENT oLabelLegendaCancelado
    COMPONENT oSQLQueryPedidos
 
    COMPONENT oMySQL
@@ -50,11 +54,11 @@ CLASS TFrmPrincipal FROM TForm
    METHOD OptionNovoPedidoClick( oSender )
    METHOD OptionVisualizarPedidoClick( oSender )
    METHOD OptionCancelarPedidoClick( oSender )
-   METHOD BrowsePedidosDrawCell( oSender, @cText, @nClrText, @nClrPane, lHighLite, hDC, aRect )
    METHOD OptionFiltrarPedidoClick( oSender )
+   METHOD ClienteTemPedido()
    METHOD BrowsePedidosKeyDown( oSender, nKey, nFlags )
    METHOD BrowsePedidosDblClick( oSender, nKeys, nCol, nRow )
-   METHOD ClienteTemPedido()
+   METHOD BrowsePedidosDrawCell( oSender, @cText, @nClrText, @nClrPane, lHighLite, hDC, aRect )
 
 ENDCLASS
 
@@ -408,10 +412,14 @@ RETURN Nil
 
 //------------------------------------------------------------------------------
 
-METHOD BrowsePedidosDrawCell( oSender, cText, nClrText, nClrPane, lHighLite, hDC, aRect ) CLASS TFrmPrincipal
+METHOD OptionFiltrarPedidoClick( oSender ) CLASS TFrmPrincipal
 
-   if ::oSQLQueryPedidos:cancelado
-      nClrText:=clRed
+   if ::oBrowsePedidos:lFilterBar
+      ::oBrowseClientes:lFilterBar:=.F.
+      oSender:cText:="Ativar filtro"
+    else
+      ::oBrowsePedidos:lFilterBar:=.T.
+      oSender:cText:="Desativar filtro"
    endif
 
 RETURN Nil
@@ -440,14 +448,10 @@ RETURN Nil
 
 //------------------------------------------------------------------------------
 
-METHOD OptionFiltrarPedidoClick( oSender ) CLASS TFrmPrincipal
+METHOD BrowsePedidosDrawCell( oSender, cText, nClrText, nClrPane, lHighLite, hDC, aRect ) CLASS TFrmPrincipal
 
-   if ::oBrowsePedidos:lFilterBar
-      ::oBrowseClientes:lFilterBar:=.F.
-      oSender:cText:="Ativar filtro"
-    else
-      ::oBrowsePedidos:lFilterBar:=.T.
-      oSender:cText:="Desativar filtro"
+   if ::oSQLQueryPedidos:cancelado
+      nClrText:=clRed
    endif
 
 RETURN Nil
