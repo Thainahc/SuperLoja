@@ -5,6 +5,7 @@ METHOD CreateForm( lCreate ) CLASS TFrmCliente
       ::SetClientSize( 332, 121 )
       ::cText := "Novo cliente"
       ::oFont := TFont():Create( "MS Sans Serif", 8, 0, 400 )
+      ::nBorderStyle := bsSINGLE
       ::lParentIcon := .F.
       ::oIcon := "loja"
       ::lCentered := .T.
@@ -21,6 +22,7 @@ METHOD CreateForm( lCreate ) CLASS TFrmCliente
       :SetBounds( 12, 20, 37, 20 )
       :cText := "Código:"
       :nVAlignment := vaCENTER
+      :lAutoSize := .F.
       :Create()
    END
 
@@ -36,6 +38,7 @@ METHOD CreateForm( lCreate ) CLASS TFrmCliente
       :SetBounds( 20, 48, 32, 20 )
       :cText := "Nome:"
       :nVAlignment := vaCENTER
+      :lAutoSize := .F.
       :Create()
    END
 
