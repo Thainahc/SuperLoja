@@ -69,6 +69,7 @@
       <File Filename="FrmPrincipal.prg"/>
       <File Filename="FrmProduto.prg"/>
       <File Filename="FrmCliente.prg"/>
+      <File Filename="FrmPedido.prg"/>
       <File Filename="Funcoes_LOG.prg"/>
       <File Filename="Funcoes_SQL.prg"/>
    </Files>
