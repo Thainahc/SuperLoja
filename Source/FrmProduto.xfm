@@ -5,6 +5,7 @@ METHOD CreateForm( lCreate ) CLASS TFrmProduto
       ::SetClientSize( 432, 118 )
       ::cText := "Novo produto"
       ::oFont := TFont():Create( "MS Sans Serif", 8, 0, 400 )
+      ::nBorderStyle := bsSINGLE
       ::lParentIcon := .F.
       ::oIcon := "loja"
       ::lCentered := .T.
