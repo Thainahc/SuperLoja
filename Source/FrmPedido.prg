@@ -54,12 +54,14 @@ RETURN Nil
 
 METHOD BrowseItensColumnProdutoCreate( oSender ) CLASS TFrmPedido
 
-   LOCAL aProduto:={}, aProdutos:={}
+   LOCAL aProduto:={}, aProdutos:={}, cID:='', cNome:=''
 
-   Application:oMainForm:oMySQL:Execute("SELECT nome FROM produtos ORDER BY nome",,@aProdutos)
+   Application:oMainForm:oMySQL:Execute("SELECT id, nome FROM produtos ORDER BY nome",,@aProdutos)
 
    for each aProduto in aProdutos
-      AAdd(::oBrowseItens:ColWithHeader("Produto"):aEditListText,aProduto[1])
+      cID  :=AllTrim(Str(aProduto[1]))
+      cNome:=aProduto[2]
+      AAdd(::oBrowseItens:ColWithHeader("Produto"):aEditListText,cID+' - '+cNome)
    next
 
 RETURN Nil
@@ -168,12 +170,12 @@ RETURN Nil
 
 METHOD GetProdutoId( cProdutoNome ) CLASS TFrmPedido
 
-   LOCAL aProduto:={}, nProdutoID:=0
+   LOCAL nPosicaoTraco:=0, nProdutoID:=0
 
-   Application:oMainForm:oMySQL:Execute("SELECT id FROM produtos WHERE nome="+ValToSQL(cProdutoNome),,@aProduto)
+   nPosicaoTraco:=At('-',cProdutoNome)
 
-   if Len(aProduto)>0
-      nProdutoID:=aProduto[1,1]
+   if nPosicaoTraco>0
+      nProdutoID:=Val(SubStr(cProdutoNome,1,nPosicaoTraco-1))
    endif
 
 RETURN nProdutoID
@@ -229,6 +231,7 @@ METHOD PreencheBrowseItens() CLASS TFrmPedido
    LOCAL cSQL:='', aItem:={}, aItens:={}, cNome:='', nQuantidade:=0
 
    cSQL:=" SELECT"
+   cSQL+=" pi.produto_id,"
    cSQL+=" p.nome,"
    cSQL+=" pi.quantidade"
    cSQL+=" FROM pedidos_itens pi"
@@ -238,8 +241,8 @@ METHOD PreencheBrowseItens() CLASS TFrmPedido
    Application:oMainForm:oMySQL:Execute(cSQL,,@aItens)
 
    for each aItem in aItens
-      cNome      :=aItem[1]
-      nQuantidade:=aItem[2]
+      cNome      :=AllTrim(Str(aItem[1]))+' - '+aItem[2]
+      nQuantidade:=aItem[3]
       ::oBrowseItens:AddRow({cNome,nQuantidade})
    next
 
