@@ -1,8 +1,8 @@
 METHOD CreateForm( lCreate ) CLASS TFrmPedido
 
    IF lCreate
-      ::SetBounds( 739, 461, 442, 157 )
-      ::SetClientSize( 426, 118 )
+      ::SetBounds( 739, 461, 442, 413 )
+      ::SetClientSize( 426, 374 )
       ::cText := "Novo pedido"
       ::oFont := TFont():Create( "MS Sans Serif", 8, 0, 400 )
       ::nBorderStyle := bsSINGLE
@@ -71,8 +71,59 @@ METHOD CreateForm( lCreate ) CLASS TFrmPedido
       :Create()
    END
 
+   WITH OBJECT ::oBtnNovoItem := TBtnBmp():New( Self )
+      :SetBounds( 288, 72, 38, 34 )
+      :oBitmaps := "incluir"
+      :OnClick := "BtnNovoItemClick"
+      :Create()
+   END
+
+   WITH OBJECT ::oBtnAlterarItem := TBtnBmp():New( Self )
+      :SetBounds( 332, 72, 38, 34 )
+      :oBitmaps := "alterar"
+      :OnClick := "BtnAlterarItemClick"
+      :Create()
+   END
+
+   WITH OBJECT ::oBtnExcluirItem := TBtnBmp():New( Self )
+      :SetBounds( 376, 72, 38, 34 )
+      :oBitmaps := "excluir"
+      :OnClick := "BtnExcluirItemClick"
+      :Create()
+   END
+
+   WITH OBJECT ::oBrowseItens := TArrayBrowse():New( Self )
+      :SetBounds( 16, 112, 398, 214 )
+      WITH OBJECT TArrayBrwColumn():New( ::oBrowseItens )
+         :cHeader := "Produto"
+         :nAlignment := taLEFTHEADERCENTER
+         :nWidth := 268
+         :nEditType := beLISTBOX
+         :OnCreate := "BrowseItensColumnProdutoCreate"
+         :Create()
+      END
+
+      WITH OBJECT TArrayBrwColumn():New( ::oBrowseItens )
+         :cHeader := "Quantidade"
+         :cPicture := "@E 999,999.999"
+         :nAlignment := taRIGHTHEADERCENTER
+         :nWidth := 86
+         :nEditType := beGET
+         :uDefaultValue := 1
+         :Create()
+      END
+
+      TBrwRecSel():Create( ::oBrowseItens )
+
+      :lAllowAppend := .T.
+      :lAllowInsert := .T.
+      :lAllowDelete := .T.
+      :lAutoSave := .T.
+      :Create()
+   END
+
    WITH OBJECT ::oBtnConfirmar := TBtnBmp():New( Self )
-      :SetBounds( 328, 76, 90, 30 )
+      :SetBounds( 324, 336, 90, 30 )
       :cText := "Confirmar"
       :oBitmaps := "confirmar"
       :OnClick := "BtnConfirmarClick"

@@ -74,6 +74,7 @@
       <File Filename="Funcoes_SQL.prg"/>
    </Files>
    <Libraries>
+      <Library Filename="[harbour]xhb.lib"/>
       <Library Filename="[xailer]xailer"/>
       <Library Filename="[xailer]xailertcls"/>
       <Library Filename="[xailer]samples"/>

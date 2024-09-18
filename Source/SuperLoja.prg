@@ -2,9 +2,10 @@
 
 Procedure Main()
 
-   SET DATE TO BRITISH
-   SET EPOCH TO 1950
-   SET CENTURY ON
+   SET DATE     TO BRITISH
+   SET EPOCH    TO 1950
+   SET CENTURY  ON
+   SET DECIMALS TO 3
 
    Application:cTitle := "Super Loja"
    Application:oIcon := "loja"
