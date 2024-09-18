@@ -110,6 +110,11 @@ METHOD ValidaDados() CLASS TFrmPedido
       RETURN .F.
    endif
 
+   if Empty(::oBrowseItens:aArrayData)
+      MessageBox(,"Informe os itens do pedido.","Atenção",MB_ICONWARNING)
+      RETURN .F.
+   endif
+
 RETURN .T.
 
 //------------------------------------------------------------------------------
